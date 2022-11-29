@@ -13,6 +13,9 @@
 		63913DBD2935CBAD005D02F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63913DBB2935CBAD005D02F2 /* Main.storyboard */; };
 		63913DBF2935CBAF005D02F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63913DBE2935CBAF005D02F2 /* Assets.xcassets */; };
 		63913DC22935CBAF005D02F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63913DC02935CBAF005D02F2 /* LaunchScreen.storyboard */; };
+		63913DCA2935D17B005D02F2 /* DiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63913DC92935D17B005D02F2 /* DiaryCell.swift */; };
+		63913DCC2935D1AE005D02F2 /* StarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63913DCB2935D1AE005D02F2 /* StarViewController.swift */; };
+		63913DCE2935D261005D02F2 /* StarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63913DCD2935D261005D02F2 /* StarCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		63913DBE2935CBAF005D02F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63913DC12935CBAF005D02F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63913DC32935CBAF005D02F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63913DC92935D17B005D02F2 /* DiaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCell.swift; sourceTree = "<group>"; };
+		63913DCB2935D1AE005D02F2 /* StarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarViewController.swift; sourceTree = "<group>"; };
+		63913DCD2935D261005D02F2 /* StarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 				63913DBE2935CBAF005D02F2 /* Assets.xcassets */,
 				63913DC02935CBAF005D02F2 /* LaunchScreen.storyboard */,
 				63913DC32935CBAF005D02F2 /* Info.plist */,
+				63913DC92935D17B005D02F2 /* DiaryCell.swift */,
+				63913DCB2935D1AE005D02F2 /* StarViewController.swift */,
+				63913DCD2935D261005D02F2 /* StarCell.swift */,
 			);
 			path = Diary;
 			sourceTree = "<group>";
@@ -139,8 +148,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				63913DBA2935CBAD005D02F2 /* ViewController.swift in Sources */,
+				63913DCE2935D261005D02F2 /* StarCell.swift in Sources */,
 				63913DB62935CBAD005D02F2 /* AppDelegate.swift in Sources */,
 				63913DB82935CBAD005D02F2 /* SceneDelegate.swift in Sources */,
+				63913DCA2935D17B005D02F2 /* DiaryCell.swift in Sources */,
+				63913DCC2935D1AE005D02F2 /* StarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
