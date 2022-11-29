@@ -95,6 +95,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="Xub-aC-DQl" id="6BM-eO-ZM7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -173,6 +176,12 @@
                     <navigationItem key="navigationItem" title="일기 작성" id="Gjz-14-2sh">
                         <barButtonItem key="rightBarButtonItem" title="등록" id="wsu-Fv-wGr"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="confirmButton" destination="wsu-Fv-wGr" id="Ppj-XZ-zQ2"/>
+                        <outlet property="contentsTextView" destination="nes-l6-iSL" id="I6w-cS-fgs"/>
+                        <outlet property="dateTextField" destination="yCx-Ez-K8U" id="4Cf-XM-WY0"/>
+                        <outlet property="titleTextField" destination="Nuz-BC-Lff" id="tCN-LJ-8u6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPf-ph-SAE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
