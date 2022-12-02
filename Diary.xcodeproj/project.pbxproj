@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		63913DB62935CBAD005D02F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63913DB52935CBAD005D02F2 /* AppDelegate.swift */; };
 		63913DB82935CBAD005D02F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63913DB72935CBAD005D02F2 /* SceneDelegate.swift */; };
-		63913DBA2935CBAD005D02F2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63913DB92935CBAD005D02F2 /* ViewController.swift */; };
+		63913DBA2935CBAD005D02F2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63913DB92935CBAD005D02F2 /* MainViewController.swift */; };
 		63913DBD2935CBAD005D02F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63913DBB2935CBAD005D02F2 /* Main.storyboard */; };
 		63913DBF2935CBAF005D02F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63913DBE2935CBAF005D02F2 /* Assets.xcassets */; };
 		63913DC22935CBAF005D02F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63913DC02935CBAF005D02F2 /* LaunchScreen.storyboard */; };
@@ -25,7 +25,7 @@
 		63913DB22935CBAD005D02F2 /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63913DB52935CBAD005D02F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63913DB72935CBAD005D02F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63913DB92935CBAD005D02F2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		63913DB92935CBAD005D02F2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		63913DBC2935CBAD005D02F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63913DBE2935CBAF005D02F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63913DC12935CBAF005D02F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		63913DD72935DA25005D02F2 /* VIew */ = {
 			isa = PBXGroup;
 			children = (
-				63913DB92935CBAD005D02F2 /* ViewController.swift */,
+				63913DB92935CBAD005D02F2 /* MainViewController.swift */,
 				63913DCB2935D1AE005D02F2 /* StarViewController.swift */,
 				63913DCF2935D385005D02F2 /* WriteDiaryViewController.swift */,
 				63913DD12935D3C7005D02F2 /* DiaryDetaillViewController.swift */,
@@ -180,7 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63913DBA2935CBAD005D02F2 /* ViewController.swift in Sources */,
+				63913DBA2935CBAD005D02F2 /* MainViewController.swift in Sources */,
 				63913DD02935D385005D02F2 /* WriteDiaryViewController.swift in Sources */,
 				63913DCE2935D261005D02F2 /* StarCell.swift in Sources */,
 				63913DB62935CBAD005D02F2 /* AppDelegate.swift in Sources */,
