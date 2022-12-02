@@ -75,6 +75,10 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="180" height="200"/>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="kiC-Uc-oyz" id="Bu2-YN-RAu"/>
+                                            <outlet property="titleLebel" destination="flo-RX-31Y" id="5E7-po-VYR"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -174,7 +178,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="일기 작성" id="Gjz-14-2sh">
-                        <barButtonItem key="rightBarButtonItem" title="등록" id="wsu-Fv-wGr"/>
+                        <barButtonItem key="rightBarButtonItem" title="등록" id="wsu-Fv-wGr">
+                            <connections>
+                                <action selector="tapConfirmButton:" destination="lhb-Dr-fdw" id="TpQ-D2-1Lg"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="confirmButton" destination="wsu-Fv-wGr" id="Ppj-XZ-zQ2"/>
