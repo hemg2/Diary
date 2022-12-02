@@ -97,6 +97,17 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let viewContoller = self.storyboard?.instantiateViewController(withIdentifier: "DiaryDetaillViewController") as? DiaryDetaillViewController else { return }
+        let diary = self.diaryList[indexPath.row]
+        viewContoller.diary = diary
+        viewContoller.indexPath = indexPath
+        viewContoller.delegate = self
+        self.navigationController?.pushViewController(viewContoller, animated: true)
+    }
+}
+
 extension MainViewController: WriteDiaryViewDelegate {
     func didSelectReigster(diary: Diary) {
         self.diaryList.append(diary)
@@ -104,5 +115,12 @@ extension MainViewController: WriteDiaryViewDelegate {
             $0.date.compare($1.date) == .orderedDescending
         })
         self.collectionView.reloadData()
+    }
+}
+
+extension MainViewController: DiaryDetailViewDelegate {
+    func didSelectDelete(indexPath: IndexPath) {
+        self.diaryList.remove(at: indexPath.row)
+        self.collectionView.deleteItems(at: [indexPath])
     }
 }
