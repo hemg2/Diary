@@ -42,6 +42,11 @@ class DiaryDetaillViewController: UIViewController {
     }
     
     @IBAction func tapEditButton(_ sender: Any) {
+        guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "WriteDiaryViewController") as? WriteDiaryViewController else { return }
+        guard let indexPath = self.indexPath else { return }
+        guard let diary = self.diary else { return }
+        viewController.diaryEditorMode = .edit(indexPath, diary)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     @IBAction func tapDeleteButton(_ sender: Any) {

@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum DiaryEditorMode {
+    case new
+    case edit(IndexPath, Diary)
+}
+
 protocol WriteDiaryViewDelegate: AnyObject {
     func didSelectReigster(diary: Diary)
 }
@@ -21,6 +26,7 @@ class WriteDiaryViewController: UIViewController {
     private let datePicker = UIDatePicker()
     private var diaryDate: Date?
     weak var delegate: WriteDiaryViewDelegate?
+    var diaryEditorMode: DiaryEditorMode = .new
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +36,21 @@ class WriteDiaryViewController: UIViewController {
         confirmButton.isEnabled = false
     }
     
+    
+    
+    private func configureContentsTextView() {
+        let borderColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
+        self.contentsTextView.layer.borderColor = borderColor.cgColor
+        self.contentsTextView.layer.borderWidth = 0.5
+    }
+    
+    
     private func configureInputField() {
         self.contentsTextView.delegate = self
         self.titleTextField.addTarget(self, action: #selector(titleTextFieldDidChange(_:)), for: .editingChanged)
         self.dateTextField.addTarget(self, action: #selector(dateTextFieldDiChange(_:)), for: .editingChanged)
     }
+    
     
     @IBAction func tapConfirmButton(_ sender: Any) {
         guard let title = self.titleTextField.text else { return }
@@ -45,11 +61,6 @@ class WriteDiaryViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    private func configureContentsTextView() {
-        let borderColor = UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
-        self.contentsTextView.layer.borderColor = borderColor.cgColor
-        self.contentsTextView.layer.borderWidth = 0.5
-    }
     
     private func configureDatePicker() {
         self.datePicker.datePickerMode = .date
