@@ -21,6 +21,7 @@ class DiaryDetaillViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        NotificationCenter.default.addObserver(self, selector: #selector(starDiaryNotification(_:)), name: NSNotification.Name("starDiary"), object: nil)
     }
     
     private func configureView() {
@@ -43,9 +44,19 @@ class DiaryDetaillViewController: UIViewController {
     
     @objc func editDiaryNotification(_ notification: Notification) {
         guard let diary = notification.object as? Diary else { return }
-        guard let row = notification.userInfo?["indexPath.row"] as? Int else { return }
         self.diary = diary
         self.configureView()
+    }
+    
+    @objc func starDiaryNotification(_ notification: Notification) {
+        guard let starDiary = notification.object as? [String: Any] else { return }
+        guard let isStar = starDiary["isStar"] as? Bool else { return }
+        guard let uuidString = starDiary["uuidString"] as? String else { return }
+        guard let diary = self.diary else { return }
+        if diary.uuidString == uuidString {
+            self.diary?.isStar = isStar
+            self.configureView()
+        }
     }
     
     @IBAction func tapEditButton(_ sender: Any) {
@@ -58,14 +69,13 @@ class DiaryDetaillViewController: UIViewController {
     }
     
     @IBAction func tapDeleteButton(_ sender: Any) {
-        guard let indexPath = self.indexPath else { return }
-        NotificationCenter.default.post(name: NSNotification.Name("deleteDiary"), object: indexPath)
+        guard let uuidString = self.indexPath else { return }
+        NotificationCenter.default.post(name: NSNotification.Name("deleteDiary"), object: uuidString)
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func tapStarButton() {
         guard let isStar = self.diary?.isStar else { return }
-        guard let indexPath = self.indexPath else { return }
         if isStar {
             self.starButton?.image = UIImage(systemName: "star")
         } else {
@@ -73,8 +83,9 @@ class DiaryDetaillViewController: UIViewController {
         }
         self.diary?.isStar = !isStar
         NotificationCenter.default.post(name: NSNotification.Name("starDiary"), object: [
+            "diary": self.diary,
             "isStar": self.diary?.isStar ?? false,
-            "indexPath": indexPath],
+            "uuidString": diary?.uuidString],
         userInfo: nil)
     }
     
