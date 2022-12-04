@@ -33,9 +33,30 @@ class WriteDiaryViewController: UIViewController {
         configureContentsTextView()
         configureDatePicker()
         configureInputField()
+        configureEditMode()
         confirmButton.isEnabled = false
     }
     
+    private func configureEditMode() {
+        switch self.diaryEditorMode {
+        case let .edit(_, diary):
+            self.titleTextField.text = diary.title
+            self.contentsTextView.text = diary.contents
+            self.dateTextField.text = self.dateToStriong(date: diary.date)
+            self.diaryDate = diary.date
+            self.confirmButton.title = "수정"
+            
+        default:
+            break
+        }
+    }
+    
+    private func dateToStriong(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yy년 MM월 dd일(EEEEE)"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.string(from: date)
+    }
     
     
     private func configureContentsTextView() {
@@ -57,7 +78,19 @@ class WriteDiaryViewController: UIViewController {
         guard let contents = self.contentsTextView.text else { return }
         guard let date = self.diaryDate else { return }
         let diary = Diary(title: title, contents: contents, date: date, isStar: false)
-        self.delegate?.didSelectReigster(diary: diary)
+        
+        switch self.diaryEditorMode {
+        case .new:
+            self.delegate?.didSelectReigster(diary: diary)
+        case let .edit(indexpath, _):
+            NotificationCenter.default.post(name: NSNotification.Name("editDiary"),
+                                            object: diary,
+            userInfo: [
+                "indexpath.row": indexpath.row
+            ])
+            
+        }
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -69,6 +102,7 @@ class WriteDiaryViewController: UIViewController {
         self.dateTextField.inputView = self.datePicker
         self.datePicker.locale = Locale(identifier: "ko-KR")
     }
+    
     @objc private func datePickerValueDidChange(_ datePicker: UIDatePicker) {
      let formmater = DateFormatter()
         formmater.dateFormat = "yyyy년 MM월 dd일(EEEEE)"
