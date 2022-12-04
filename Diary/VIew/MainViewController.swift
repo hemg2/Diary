@@ -22,7 +22,8 @@ class MainViewController: UIViewController {
         configureCollectionView()
         loadDiaryList()
         NotificationCenter.default.addObserver(self, selector: #selector(editDiaryNotification(_:)), name: NSNotification.Name("editDiary"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(starDiaryNotification(_:)), name: NSNotification.Name("starDiaty"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deleteDiaryNotification(_:)), name: Notification.Name("deleteDiary"), object: nil)
     }
     
     
@@ -41,6 +42,19 @@ class MainViewController: UIViewController {
             $0.date.compare($1.date) == .orderedDescending
         })
         self.collectionView.reloadData()
+    }
+    
+    @objc func starDiaryNotification(_ notification: Notification) {
+        guard let starDiary = notification.object as? [String: Any] else { return }
+        guard let isStar = starDiary["isStar"] as? Bool else { return }
+        guard let indexPath = starDiary["indexPath"] as? IndexPath else { return }
+        self.diaryList[indexPath.row].isStar = isStar
+    }
+    
+    @objc func deleteDiaryNotification(_ notification: Notification) {
+        guard let indexPath = notification.object as? IndexPath else { return }
+        self.diaryList.remove(at: indexPath.row)
+        self.collectionView.deleteItems(at: [indexPath])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,7 +83,7 @@ class MainViewController: UIViewController {
         self.diaryList = data.compactMap {
             guard let title = $0["title"] as? String else { return nil }
             guard let contents = $0["contents"] as? String else { return nil }
-            guard let date = $0["isStar"] as? Date else { return nil }
+            guard let date = $0["date"] as? Date else { return nil }
             guard let isStar = $0["isStar"] as? Bool else { return nil }
             return Diary(title: title, contents: contents, date: date, isStar: isStar)
         }
@@ -115,7 +129,6 @@ extension MainViewController: UICollectionViewDelegate {
         let diary = self.diaryList[indexPath.row]
         viewContoller.diary = diary
         viewContoller.indexPath = indexPath
-        viewContoller.delegate = self
         self.navigationController?.pushViewController(viewContoller, animated: true)
     }
 }
@@ -127,16 +140,5 @@ extension MainViewController: WriteDiaryViewDelegate {
             $0.date.compare($1.date) == .orderedDescending
         })
         self.collectionView.reloadData()
-    }
-}
-
-extension MainViewController: DiaryDetailViewDelegate {
-    func didSelectDelete(indexPath: IndexPath) {
-        self.diaryList.remove(at: indexPath.row)
-        self.collectionView.deleteItems(at: [indexPath])
-    }
-    
-    func didSeletStar(indexPath: IndexPath, isStar: Bool) {
-        self.diaryList[indexPath.row].isStar = isStar
     }
 }
