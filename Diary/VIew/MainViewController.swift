@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
         configureCollectionView()
         loadDiaryList()
         NotificationCenter.default.addObserver(self, selector: #selector(editDiaryNotification(_:)), name: NSNotification.Name("editDiary"), object: nil)
+        
     }
     
     
@@ -135,4 +136,7 @@ extension MainViewController: DiaryDetailViewDelegate {
         self.collectionView.deleteItems(at: [indexPath])
     }
     
+    func didSeletStar(indexPath: IndexPath, isStar: Bool) {
+        self.diaryList[indexPath.row].isStar = isStar
+    }
 }
