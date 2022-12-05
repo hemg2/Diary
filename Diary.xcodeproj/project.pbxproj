@@ -102,9 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				63913DB92935CBAD005D02F2 /* MainViewController.swift */,
-				63913DCB2935D1AE005D02F2 /* StarViewController.swift */,
 				63913DCF2935D385005D02F2 /* WriteDiaryViewController.swift */,
 				63913DD12935D3C7005D02F2 /* DiaryDetaillViewController.swift */,
+				63913DCB2935D1AE005D02F2 /* StarViewController.swift */,
 			);
 			path = VIew;
 			sourceTree = "<group>";

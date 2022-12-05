@@ -116,7 +116,6 @@ extension MainViewController: UICollectionViewDataSource {
         let diary = self.diaryList[indexPath.row]
         cell.titleLebel.text = diary.title
         cell.dateLabel.text = self.dateToStriong(date: diary.date)
-        
         return cell
     }
 }

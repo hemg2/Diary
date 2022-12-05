@@ -86,7 +86,6 @@ class WriteDiaryViewController: UIViewController {
             let diary = Diary(uuidString: diary.uuidString, title: title, contents: contents, date: date, isStar: diary.isStar)
             NotificationCenter.default.post(name: NSNotification.Name("editDiary"), object: diary, userInfo: nil)
         }
-        
         self.navigationController?.popViewController(animated: true)
     }
     
