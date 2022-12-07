@@ -28,7 +28,7 @@ class MainViewController: UIViewController {
     
     
     private func configureCollectionView() {
-        self.collectionView.collectionViewLayout = UICollectionViewLayout()
+        self.collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         collectionView.delegate = self
         collectionView.dataSource = self
