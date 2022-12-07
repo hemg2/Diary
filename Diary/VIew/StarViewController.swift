@@ -13,7 +13,6 @@ class StarViewController: UIViewController {
     
     private var diaryList = [Diary]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()

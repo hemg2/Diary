@@ -44,6 +44,7 @@ class DiaryDetaillViewController: UIViewController {
     
     @objc func editDiaryNotification(_ notification: Notification) {
         guard let diary = notification.object as? Diary else { return }
+        guard let row = notification.userInfo?["indexPath.row"] as? Int else { return }
         self.diary = diary
         self.configureView()
     }
@@ -69,7 +70,7 @@ class DiaryDetaillViewController: UIViewController {
     }
     
     @IBAction func tapDeleteButton(_ sender: Any) {
-        guard let uuidString = self.indexPath else { return }
+        guard let uuidString = self.diary?.uuidString else { return }
         NotificationCenter.default.post(name: NSNotification.Name("deleteDiary"), object: uuidString)
         self.navigationController?.popViewController(animated: true)
     }
