@@ -68,7 +68,7 @@ class MainViewController: UIViewController {
         self.diaryList = data.compactMap {
             guard let title = $0["title"] as? String else { return nil }
             guard let contents = $0["contents"] as? String else { return nil }
-            guard let date = $0["isStar"] as? Date else { return nil }
+            guard let date = $0["date"] as? Date else { return nil }
             guard let isStar = $0["isStar"] as? Bool else { return nil }
             return Diary(title: title, contents: contents, date: date, isStar: isStar)
         }
@@ -133,6 +133,10 @@ extension MainViewController: DiaryDetailViewDelegate {
     func didSelectDelete(indexPath: IndexPath) {
         self.diaryList.remove(at: indexPath.row)
         self.collectionView.deleteItems(at: [indexPath])
+    }
+    
+    func didSelectStar(indexPath: IndexPath, isStar: Bool) {
+        self.diaryList[indexPath.row].isStar = isStar
     }
     
 }
