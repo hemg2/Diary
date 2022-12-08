@@ -8,7 +8,7 @@
 import UIKit
 
 class DiaryDetaillViewController: UIViewController {
-
+    
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var contentsTextView: UITextView!
@@ -86,7 +86,7 @@ class DiaryDetaillViewController: UIViewController {
             "diary": self.diary,
             "isStar": self.diary?.isStar ?? false,
             "uuidString": diary?.uuidString],
-        userInfo: nil)
+                                        userInfo: nil)
     }
     
     deinit {

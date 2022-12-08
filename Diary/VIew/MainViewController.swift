@@ -8,7 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
     @IBOutlet var collectionView: UICollectionView!
     
     private var diaryList = [Diary]() {

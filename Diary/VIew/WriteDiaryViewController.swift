@@ -17,7 +17,7 @@ protocol WriteDiaryViewDelegate: AnyObject {
 }
 
 class WriteDiaryViewController: UIViewController {
-
+    
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var contentsTextView: UITextView!
     @IBOutlet var dateTextField: UITextField!
@@ -99,7 +99,7 @@ class WriteDiaryViewController: UIViewController {
     }
     
     @objc private func datePickerValueDidChange(_ datePicker: UIDatePicker) {
-     let formmater = DateFormatter()
+        let formmater = DateFormatter()
         formmater.dateFormat = "yyyy년 MM월 dd일(EEEEE)"
         formmater.locale = Locale(identifier: "ko_KR")
         self.diaryDate = datePicker.date

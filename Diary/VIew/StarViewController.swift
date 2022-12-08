@@ -76,7 +76,7 @@ class StarViewController: UIViewController {
             })
             self.collectionView.reloadData()
         } else {
-//            guard let index = self.diaryList.firstIndex(where: {$0.uuidString == uuidString }) else { return }
+            //            guard let index = self.diaryList.firstIndex(where: {$0.uuidString == uuidString }) else { return }
             self.diaryList.remove(at: index)
             self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
         }
