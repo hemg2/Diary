@@ -68,6 +68,7 @@ class StarViewController: UIViewController {
         guard let dairy = starDiary["diary"] as? Diary else { return }
         guard let isStar = starDiary["isStar"] as? Bool else { return }
         guard let uuidString = starDiary["uuidString"] as? String else { return }
+        guard let index = self.diaryList.firstIndex(where: {$0.uuidString == uuidString }) else { return }
         if !isStar {
             self.diaryList.append(dairy)
             self.diaryList = self.diaryList.sorted(by: {
@@ -75,7 +76,7 @@ class StarViewController: UIViewController {
             })
             self.collectionView.reloadData()
         } else {
-            guard let index = self.diaryList.firstIndex(where: {$0.uuidString == uuidString }) else { return }
+//            guard let index = self.diaryList.firstIndex(where: {$0.uuidString == uuidString }) else { return }
             self.diaryList.remove(at: index)
             self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
         }
