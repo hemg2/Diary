@@ -73,7 +73,7 @@ class WriteDiaryViewController: UIViewController {
     }
     
     
-    @IBAction func tapConfirmButton(_ sender: Any) {
+    @IBAction func tapConfirmButton(_ sender: UIBarButtonItem) {
         guard let title = self.titleTextField.text else { return }
         guard let contents = self.contentsTextView.text else { return }
         guard let date = self.diaryDate else { return }
@@ -85,9 +85,9 @@ class WriteDiaryViewController: UIViewController {
         case let .edit(indexpath, _):
             NotificationCenter.default.post(name: NSNotification.Name("editDiary"),
                                             object: diary,
-            userInfo: [
-                "indexpath.row": indexpath.row
-            ])
+                                            userInfo: [
+                                                "indexPath.row": indexpath.row
+                                            ])
             
         }
         
