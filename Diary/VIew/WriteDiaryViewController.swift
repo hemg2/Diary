@@ -17,7 +17,7 @@ protocol WriteDiaryViewDelegate: AnyObject {
 }
 
 class WriteDiaryViewController: UIViewController {
-    
+
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var contentsTextView: UITextView!
     @IBOutlet var dateTextField: UITextField!
@@ -73,19 +73,24 @@ class WriteDiaryViewController: UIViewController {
     }
     
     
-    @IBAction func tapConfirmButton(_ sender: Any) {
+    @IBAction func tapConfirmButton(_ sender: UIBarButtonItem) {
         guard let title = self.titleTextField.text else { return }
         guard let contents = self.contentsTextView.text else { return }
         guard let date = self.diaryDate else { return }
+        let diary = Diary(title: title, contents: contents, date: date, isStar: false)
         
         switch self.diaryEditorMode {
         case .new:
-            let diary = Diary(uuidString: UUID().uuidString, title: title, contents: contents, date: date, isStar: false)
             self.delegate?.didSelectReigster(diary: diary)
-        case let .edit(indexpath, diary):
-            let diary = Diary(uuidString: diary.uuidString, title: title, contents: contents, date: date, isStar: diary.isStar)
-            NotificationCenter.default.post(name: NSNotification.Name("editDiary"), object: diary, userInfo: nil)
+        case let .edit(indexpath, _):
+            NotificationCenter.default.post(name: NSNotification.Name("editDiary"),
+                                            object: diary,
+                                            userInfo: [
+                                                "indexPath.row": indexpath.row
+                                            ])
+            
         }
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -99,7 +104,7 @@ class WriteDiaryViewController: UIViewController {
     }
     
     @objc private func datePickerValueDidChange(_ datePicker: UIDatePicker) {
-        let formmater = DateFormatter()
+     let formmater = DateFormatter()
         formmater.dateFormat = "yyyy년 MM월 dd일(EEEEE)"
         formmater.locale = Locale(identifier: "ko_KR")
         self.diaryDate = datePicker.date

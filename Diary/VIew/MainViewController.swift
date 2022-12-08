@@ -8,7 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    
+
     @IBOutlet var collectionView: UICollectionView!
     
     private var diaryList = [Diary]() {
@@ -22,8 +22,6 @@ class MainViewController: UIViewController {
         configureCollectionView()
         loadDiaryList()
         NotificationCenter.default.addObserver(self, selector: #selector(editDiaryNotification(_:)), name: NSNotification.Name("editDiary"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(starDiaryNotification(_:)), name: NSNotification.Name("starDiaty"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deleteDiaryNotification(_:)), name: Notification.Name("deleteDiary"), object: nil)
     }
     
     
@@ -36,27 +34,12 @@ class MainViewController: UIViewController {
     
     @objc func editDiaryNotification(_ notification: Notification) {
         guard let diary = notification.object as? Diary else { return }
-        guard let index = self.diaryList.firstIndex(where: { $0.uuidString == diary.uuidString }) else { return }
-        self.diaryList[index] = diary
+        guard let row = notification.userInfo?["indexPath.row"] as? Int else { return }
+        self.diaryList[row] = diary
         self.diaryList = self.diaryList.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
         })
         self.collectionView.reloadData()
-    }
-    
-    @objc func starDiaryNotification(_ notification: Notification) {
-        guard let starDiary = notification.object as? [String: Any] else { return }
-        guard let isStar = starDiary["isStar"] as? Bool else { return }
-        guard let uuidString = starDiary["uuidString"] as? String else { return }
-        guard let index = self.diaryList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
-        self.diaryList[index].isStar = isStar
-    }
-    
-    @objc func deleteDiaryNotification(_ notification: Notification) {
-        guard let uuidString = notification.object as? String else { return }
-        guard let index = self.diaryList.firstIndex(where: { $0.uuidString == uuidString }) else { return }
-        self.diaryList.remove(at: index)
-        self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,7 +52,6 @@ class MainViewController: UIViewController {
     private func saveDiaryList() {
         let date = self.diaryList.map {
             [
-                "uuidString": $0.uuidString,
                 "title": $0.title,
                 "contents": $0.contents,
                 "date": $0.date,
@@ -84,12 +66,11 @@ class MainViewController: UIViewController {
         let userDefaults = UserDefaults.standard
         guard let data = userDefaults.object(forKey: "diaryList") as? [[String : Any]] else  { return }
         self.diaryList = data.compactMap {
-            guard let uuidString = $0["uuidString"] as? String else { return nil }
             guard let title = $0["title"] as? String else { return nil }
             guard let contents = $0["contents"] as? String else { return nil }
             guard let date = $0["date"] as? Date else { return nil }
             guard let isStar = $0["isStar"] as? Bool else { return nil }
-            return Diary(uuidString:uuidString, title: title, contents: contents, date: date, isStar: isStar)
+            return Diary(title: title, contents: contents, date: date, isStar: isStar)
         }
         self.diaryList = self.diaryList.sorted(by: {
             $0.date.compare($1.date) == .orderedDescending
@@ -116,6 +97,7 @@ extension MainViewController: UICollectionViewDataSource {
         let diary = self.diaryList[indexPath.row]
         cell.titleLebel.text = diary.title
         cell.dateLabel.text = self.dateToStriong(date: diary.date)
+        
         return cell
     }
 }
@@ -132,6 +114,7 @@ extension MainViewController: UICollectionViewDelegate {
         let diary = self.diaryList[indexPath.row]
         viewContoller.diary = diary
         viewContoller.indexPath = indexPath
+        viewContoller.delegate = self
         self.navigationController?.pushViewController(viewContoller, animated: true)
     }
 }
@@ -144,4 +127,16 @@ extension MainViewController: WriteDiaryViewDelegate {
         })
         self.collectionView.reloadData()
     }
+}
+
+extension MainViewController: DiaryDetailViewDelegate {
+    func didSelectDelete(indexPath: IndexPath) {
+        self.diaryList.remove(at: indexPath.row)
+        self.collectionView.deleteItems(at: [indexPath])
+    }
+    
+    func didSelectStar(indexPath: IndexPath, isStar: Bool) {
+        self.diaryList[indexPath.row].isStar = isStar
+    }
+    
 }
